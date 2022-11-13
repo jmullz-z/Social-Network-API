@@ -19,5 +19,7 @@ Start your server using "mongod" and then use "npm start" in a separate terminal
 
 Open your Insomnia application and test the routes.
 
+##Github: https://github.com/jmullz-z/Social-Network-API.git
+
 
 
