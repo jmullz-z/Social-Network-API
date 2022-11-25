@@ -1,7 +1,6 @@
 const app = require('express').Router();
 const { Thought, User } = require('../../models')
 
-//create a new thought
 app.post('/', ({ body }, res) => {
     Thought.create(body)
         .then(({ _id }) =>
@@ -12,7 +11,6 @@ app.post('/', ({ body }, res) => {
         })
 });
 
-//Get all Thoughts
 app.get('/', (req, res) => {
     Thought.find()
      .select('-__v')
@@ -24,7 +22,6 @@ app.get('/', (req, res) => {
 });
 
 
-//Get a single thought by ID
 app.get('/:id', ({ params }, res) => {
     Thought.findOne({_id: params.id})
     .select('-__v')
@@ -37,7 +34,6 @@ app.get('/:id', ({ params }, res) => {
     })
 });
 
-//Update a thought
 app.put('/:id', ({ params, body }, res) => {
     Thought.findOneAndUpdate({ _id: params.id }, body, { runValidators: true, new: true })
         .then(dbThoughtData => {
@@ -48,7 +44,6 @@ app.put('/:id', ({ params, body }, res) => {
         })
 });
 
-//Delete a thought
 app.delete('/:userId/:thoughtId', ({ params }, res) => {
     Thought.findOneAndDelete(
         { _id: params.thoughtId },
@@ -68,7 +63,6 @@ app.delete('/:userId/:thoughtId', ({ params }, res) => {
         }).then(res.json("thought deleted"))
     });
 
-//Create a reaction using findOneAndUpdate method with ID/reactions as body and new:true
 app.post('/:id', ({ params, body }, res) => {
     Thought.findOneAndUpdate
     (

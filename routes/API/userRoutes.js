@@ -1,9 +1,6 @@
 const app = require('express').Router();
 const { User } = require('../../models')
 
-
-
-//Create a new User
 app.post('/', ({ body }, res) => {
     User.create(body)
         .then(dbUser => {
@@ -15,7 +12,6 @@ app.post('/', ({ body }, res) => {
 });
 
 
-//Get all Users
 app.get('/', (req, res) => {
     User.find()
         .then(dbUserData => {
@@ -27,9 +23,6 @@ app.get('/', (req, res) => {
         });
 });
 
-
-//GET/PUT/DELETE USER ROUTES
-//Get a single user by ID
 app.get('/:id', ({ params }, res) => {
     User.findOne({ _id: params.id })
     .select('-__v')
@@ -46,7 +39,6 @@ app.get('/:id', ({ params }, res) => {
     })
 });
 
-//Update a user
 app.put('/:id', ({ params, body }, res) => {
     User.findOneAndUpdate({ _id: params.id }, body, { runValidators: true, new: true })
     .then(dbUserData => {
@@ -62,7 +54,6 @@ app.put('/:id', ({ params, body }, res) => {
 
 });
 
-//Delete a user using findOneAndDelete method
 app.delete('/:id', ({ params }, res) => {
     User.findOneAndDelete({ _id: params.id }).then(dbUserData => {
         if (!dbUserData) {
@@ -76,9 +67,6 @@ app.delete('/:id', ({ params }, res) => {
     });
 });
 
-//ADD FRIEND/REMOVE FRIEND ROUTES
-
-//Add a friend using id/friends/friendid
 app.post('/:id/friends/:friendId', ({ params }, res) => {
     User.findOneAndUpdate(
         { _id: params.id },
@@ -99,7 +87,6 @@ app.post('/:id/friends/:friendId', ({ params }, res) => {
       });
 });
 
-//Delete a friend 
 app.delete('/:id/friends/:friendId', ({ params }, res) => {
     User.findOneAndUpdate(
         { _id: params.id },

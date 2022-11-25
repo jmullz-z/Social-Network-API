@@ -49,11 +49,10 @@ const thoughtSchema = new Schema({
         username: {
             type: String,
             required: true,
-            //User that creates the "thought"
         },
         reactions: [reactionSchema]
     },
-    //Schema Settings
+  
     {
         toJSON: {
             getters: true,
@@ -62,12 +61,10 @@ const thoughtSchema = new Schema({
         id: false
     })
 
-//Get Method for Date for Thought
 function formatDate() {
     console.log(`The current date is ${this.createdAt}`)
 }
 
-//Virtual for reaction count
 thoughtSchema.virtual('reactionCount').get(function() {
     return this.reactions.length
   });
